@@ -1,0 +1,36 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Product Detail{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-6 text-center align-self-center">
+   <img src="{{ product.product_image.url }}" alt="" class="img-fluid img-thumbnail">
+  </div>
+  <div class="col-sm-5 offset-sm-1">
+   <h2>Product Name: {{product.title}}</h2>
+   <hr>
+   <p>Product Description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, at. Dignissimos rerum incidunt temporibus laudantium. Rem, eveniet corporis. Itaque delectus quae nesciunt nemo, maiores minus deserunt vel. Vero, nulla quisquam!</p> <br>
+   <h4> <strong> <small class=" text-danger">&#8377; {{product.selling_price}}</small>  </h4> <br>
+
+   
+   {% if status %}
+   <a href="{% url 'showcart' %}"><button class="btn btn-success">Show cart</button></a>
+   
+
+   {% else %}
+   <form action="/add-to-cart" method="POST" class="d-inline">
+    {% csrf_token %}
+        <input type="hidden" name="prod_id" id="prod_id" value={{product.id}}>
+        <button class='btn btn-primary pull-right mx-auto' type="submit" id="adding" name="addcart">Add to cart</button>
+    </form>
+
+   {% endif %}
+   <h5 class="mt-5">Available Offers</h5>
+   <ul>
+    <li>Bank Offer 5% Unlimited Cashback on Axis Bank Credit card</li>
+   </ul>
+  </div>
+ </div>
+</div>
+{% endblock main-content %}

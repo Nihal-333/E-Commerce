@@ -1,0 +1,73 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+ <h3 class="text-center my-3">Welcome your orders are</h3>
+  
+   
+  <div class="container my-2">
+    
+    <table class="table table-secondary table-hover">
+    <thead class="table-dark">
+        <tr>
+        <th scope="col">ProductName</th>
+        <th scope="col">ordered On</th>
+        <th scope="col">status</th>
+        <th scope="col">progress</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for order in orders %}
+    <tr>
+      <td>{{order.product.title}}</td>
+      <td>{{order.ordered_date}}</td>
+      <td>{{order.status}}</td>
+      {% if order.status == 'pending' %}
+      <td>
+      <div class="progress">
+      <div class="progress-bar bg-primary" role="progressbar" style="width:0%"  aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </td>
+
+      {% elif order.status == 'accepted' %}
+      <td>
+      <div class="progress">
+      <div class="progress-bar bg-info" role="progressbar" style="width:20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </td>
+
+      {% elif order.status == 'packed' %}
+      <td>
+      <div class="progress">
+      <div class="progress-bar bg-warning" role="progressbar" style="width:40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </td>
+
+      {% elif order.status == 'on the way' %}
+      <td>
+      <div class="progress">
+      <div class="progress-bar bg-danger" role="progressbar" style="width:70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </td>
+
+      {% elif order.status == 'delivered' %}
+      <td>
+      <div class="progress">
+      <div class="progress-bar bg-success role="progressbar" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+      </td>
+
+      {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+  </div>
+  
+ </div>
+</div>
+{% endblock main-content %}

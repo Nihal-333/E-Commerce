@@ -1,0 +1,57 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Search  results{% endblock title %}
+{% block main-content %}
+
+{% if fruits|length == 0 %}
+ {% load static %}
+<div class="alert alert-danger" role="alert">
+  <h4 class="text-center">Ooops ! Nothing found for {{query}} Try searching diffrent keyword</h4>
+</div>
+
+<div class="container my-4">
+      <img src="{% static 'app/images/404.png' %}" class = "img-responsive" width = "75%" height="500">
+  </div>
+
+{% else %}
+<div class="container my-4">
+
+
+  <div class="row row-cols-4">
+  {% for fruit in fruits %}
+  
+  <span class="border border-success">
+    <div class="col my-4">
+    <div><img src="{{ fruit.0.product_image.url }}" class="img-fluid"  alt="..."> </div>
+      <div class="my-2">
+        <div>
+         <strong>{{fruit.0.title}}</strong>
+         
+         <div class="my-2">
+         <strong><p class="d-inline text-danger font-weight-bold">&#8377; {{fruit.0.selling_price}}</p></strong>
+         <p class="d-inline">{{fruit.0.quantity}}</p>
+         </div>
+
+         {% if fruit.1 > 0 %}
+         <span class="btn btn-warning btn-sm">{{fruit.1}}&#37; OFF</span>
+         {% endif %}
+         <form action="add-to-cart" method="POST" class="d-inline">
+         {% csrf_token %}
+         <input type="hidden" name="prod_id" id="prod_id" value={{fruit.0.id}}>
+         
+         <button class='btn btn-sm pull-right mx-auto' style="background-color: #B915DD;">Add to cart</button>
+         </form>
+         
+        </div> 
+      </div>
+    </div>
+   </span>
+   
+  {% endfor %}
+  </div>
+
+
+</div>
+{% endif %}
+
+{% endblock main-content %}

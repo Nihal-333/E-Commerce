@@ -1,0 +1,45 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}BedBath{% endblock title %}
+{% block main-content %}
+
+<div class="container my-4">
+
+
+  <div class="row row-cols-4">
+  {% for prod in prods %}
+  
+  <span class="border border-success">
+    <div class="col my-4">
+    <div> <a href="{% url 'product-detail' prod.0.id %}"> <img src="{{ prod.0.product_image.url }}" class="img-fluid"  alt="..."> </a> </div>
+      <div class="my-2">
+        <div>
+         <strong>{{prod.0.title}}</strong>
+         
+         <div class="my-2">
+         <strong><p class="d-inline text-danger font-weight-bold">&#8377; {{prod.0.selling_price}}</p></strong>
+         <p class="d-inline">{{prod.0.quantity}}</p>
+         </div>
+
+         {% if prod.1 > 0 %}
+         <span class="btn btn-warning btn-sm">{{prod.1}}&#37; OFF</span>
+         {% endif %}
+         <form action="add-to-cart" method="POST" class="d-inline">
+         {% csrf_token %}
+         <input type="hidden" name="prod_id" id="prod_id" value={{prod.0.id}}>
+         
+         <button class='btn btn-sm pull-right mx-auto' style="background-color: #B915DD;">Add to cart</button>
+         </form>
+         
+        </div> 
+      </div>
+    </div>
+   </span>
+   
+  {% endfor %}
+  </div>
+
+
+</div>
+
+{% endblock main-content %}

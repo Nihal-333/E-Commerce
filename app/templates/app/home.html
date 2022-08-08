@@ -1,0 +1,137 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Home{% endblock title %}
+
+{% block style %}
+
+  {% comment %} img:hover {
+    cursor: pointer;
+} {% endcomment %}
+
+.hover01 img {
+	-webkit-transform: scale(1);
+	transform: scale(1);
+	-webkit-transition: .3s ease-in-out;
+	transition: .3s ease-in-out;
+}
+.hover01:hover img {
+	-webkit-transform: scale(0.9);
+	transform: scale(0.9);
+}
+
+{% endblock style %}
+
+{% block banner_slider %}
+<!--Banner Slider-->
+ <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'app/images/banner/Nb1.jpg' %}" class="d-block w-100" height="500" alt="..."> 
+    </div>
+    <div class="carousel-item">
+      <a href="{% url 'frozen' %}"><img src="{% static 'app/images/banner/Nb2.jpg' %}" class="d-block w-100"  height="500" alt="..."></a>
+    </div>
+    <div class="carousel-item">
+      <a href="{% url 'fruits' %}"><img src="{% static 'app/images/banner/Nb3.jpg' %}" class="d-block w-100" height="500" alt="..."></a>
+    </div>
+    <div class="carousel-item">
+      <a href="{% url 'grocery' %}"><img src="{% static 'app/images/banner/Nb4.jpg' %}" class="d-block w-100" height="500" alt="..."></a>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </a>
+</div>
+<!-- End Banner Slider -->
+{% endblock banner_slider %}
+
+
+{% block main-content %}
+<!-- 1st Product Slider -->
+<div class="m-3">
+ <h2> Deals of The Day</h2>
+ <!-- Slider 1 -->
+ <div class="owl-carousel" id="slider1">
+  {% for prod in prods %}
+  <div class="item"><img src="{{ prod.product_image.url }}" alt="" height="200px"><span class="fw-bold">{{prod.title}}</span><br><span class="fs-5"><button class="btn btn-warning">&#8377; {{prod.selling_price}}</button> </span></div>
+  {% endfor %}
+
+ </div>
+</div>
+<!-- End 1st Product Slider -->
+
+
+<!-- 2nd Product Slider -->
+<div class="container my-5">
+<h1 class="text-center my-3">Shop by categories</h1>
+  <div class="row row-cols-4 my-4">
+
+    <div class="col hover01">
+    <a href="{% url 'grocery' %}">
+    <img src="{% static 'app/images/mrprods/1.jpg' %}" class="img-fluid img-thumbnail"  alt="..." style="height: 250px;">
+    </a>
+    </div>
+
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/2.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/2Food-BakeryDairyFrozen.jpg' %}" class="img-fluid img-thumbnail" style="height: 250px;" alt="...">
+    </a>
+    </div>
+
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/4.jpg' %}" class="img-fluid img-thumbnail" style="height: 250px;" alt="...">
+    </a>
+    </div>
+
+  </div>
+</div>
+
+<div class="container my-5">
+  <div class="row row-cols-4">
+    <div class="col hover01">
+    <a href="{% url 'fruits' %}">
+    <img src="{% static 'app/images/mrprods/5.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/6.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/7.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/8.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div class="row row-cols-4">
+    <div class="col hover01">
+    <a href="#">
+    <img src="{% static 'app/images/mrprods/9.jpg' %}" class="img-fluid img-thumbnail" alt="..." style="height: 250px;">
+    </a>
+    </div>
+  </div>
+</div>
+
+<!-- End 2nd Product Slider -->
+{% endblock main-content %}
+
